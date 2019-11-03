@@ -74,12 +74,13 @@
     )
 )
 
+; map the eval function to each element in the list, and the final will be the result
 (defmacro threeWayBranch (x y toExecute)
     (if (< x y)
-        (eval (car toExecute))
+        (car (last (map 'list #'eval (first toExecute))))
         (if (> x y)
-            (eval (car (cdr toExecute)))
-           ; (eval (caaar toExecute))
+            (car (last (map 'list #'eval (second toExecute))))
+            (car (last (map 'list #'eval (third toExecute))))
         )
     )
 )
